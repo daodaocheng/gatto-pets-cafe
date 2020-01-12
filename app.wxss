@@ -1,0 +1,35 @@
+/**app.wxss**/
+@import "/lib/weui.wxss";
+page {
+  height: 100%;
+  background-color: #f8f8f8;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'PingFang SC',
+                 Helvetica,
+                 'STHeiti STXihei',
+                 'Microsoft YaHei',
+                 Tohoma,
+                 Arial,
+                 sans-serif;
+}
+
+.view-page {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.view-page .page-content {
+  display: flex;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100%;
+} 
+/* image{
+  width: 100%;
+} */

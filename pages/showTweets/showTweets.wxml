@@ -1,0 +1,4 @@
+<!--pages/showTweets/showTweets.wxml-->
+<view class="view-page container">
+  <web-view style="display:flex;top:{{navHeight}}px" src="{{url}}"></web-view>
+</view>

@@ -1,0 +1,50 @@
+<scroll-view scroll-y style='height:100vh;background-color:#eeeeee'>
+  <view class="top">
+    <!-- <navigator url="/pages/bindPhone/index" class='img'>
+      
+    </navigator> -->
+    <!-- <view class='top_user_info'>
+       <view class='img'><open-data type="userAvatarUrl"></open-data></view>
+       <view class='text'><open-data type="userNickName"></open-data></view>
+    </view> -->
+    <view class="top_user_info">
+      <button wx:if="{{!hasUserInfo && canIUse}}" class='requireBtn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">点击登录账户</button>
+    <block wx:else>
+      <image class='img' bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname text">{{userInfo.nickName}}</text>
+    </block>
+    </view>
+    <view class='icon'>
+      <navigator url="/pages/order/index?type=1" hover-class="none">
+        <image src='/images/pending_payment.png' mode="aspectFit"></image>1
+        <text>会员卡</text>
+      </navigator>
+      <navigator url="/pages/coupon/index" hover-class="none">
+        <image src='/images/pending_delivery.png' mode="aspectFit"></image>0
+        <text>优惠券</text>
+      </navigator>
+      <navigator url="/pages/order/index?type=4" hover-class="none">
+        <image src='/images/completed.png' mode="aspectFit"></image>0
+        <text>积分</text>
+      </navigator>
+    </view>
+  </view>
+  <navigator url="/pages/order/index" class='item'>
+    <view class='left'>
+      我的订单
+    </view>
+    <view class='right'>
+      <text>查看全部订单</text>
+      <image src='/images/my_order.png'></image>
+    </view>
+  </navigator>
+  <navigator url="/pages/addressList/index" class='item'>
+    <view class='left'>
+      地址管理
+    </view>
+    <view class='right'>
+      <text>编辑收货地址</text>
+      <image src='/images/my_order.png'></image>
+    </view>
+  </navigator>
+</scroll-view>

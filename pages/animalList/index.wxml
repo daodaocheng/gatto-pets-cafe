@@ -1,0 +1,28 @@
+<!--pages/animalList/index.wxml-->
+<view>
+  <navbar page-name="来了解我"></navbar>
+  <scroll-view class="content" scroll-x="{{false}}" scroll-y="{{true}}" style="height:{{windowHeight}}px">
+    <block wx:for="{{animals}}">
+      <view class="item" bindtap="modalShow" data-name="{{item.name}}" data-variety="{{item.variety}}" data-photo="{{item.photo}}" data-color="{{item.color}}" data-genda="{{item.genda}}" data-age="{{item.age}}" data-info="{{item.info}}">
+        <image src="{{item.photo}}" mode="aspectFill" style="min-height:{{windowWidth/3-10}}px;"></image>
+        <text>{{item.name}}</text>
+        <text>品种：{{item.variety}}</text>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">{{name}}</view>
+    <view class="modal-img">
+      <image mode="aspectFit" src="{{photo}}" style="min-width:400rpx;max-width:auto;min-height:auto;max-height:600rpx"></image>
+    </view>
+    <view class="modal-info">
+      <text>品种：{{variety}}</text>
+      <text>{{color}}</text>
+      <text>{{genda}}</text>
+      <text>{{age}}</text>
+      <text>简介：{{info}}</text>
+    </view>
+  </view>
+  <image class="modal-cancle" bindtap="hideModal" wx:if="{{showModal}}" src="../../images/cancel.png"></image>
+</view>

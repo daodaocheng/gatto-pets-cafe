@@ -1,0 +1,6 @@
+<!--pages/i_mall/index.wxml-->
+<navbar page-name="商城"></navbar>
+<view style="margin-top:50rpx;margin-left:50rpx;font-size:30rpx">
+  格度喵喵馆(复制链接到浏览器，选购精选好物~)
+  <text selectable="true">https://k.weidian.com/vtp-dPkJ</text>
+</view>

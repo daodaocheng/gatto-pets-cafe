@@ -1,0 +1,43 @@
+<!--pages/i_pets/index.wxml-->
+<view class="view-page container" disable-scroll="true">
+  <navbar page-name="来了解我"></navbar>
+  <view class="page-content">
+    <scroll-view class="orderPage-sideBar" bindscrolltolower="lower" scroll-y="true">
+      <block wx:for="{{pets}}" wx:key="">
+        <view class="menuList">
+          <view class="menu {{index==selected?'selected':''}}" data-index="{{index}}" catchtap="turnMenu">{{item.typeName}}</view>
+        </view>
+      </block>
+    </scroll-view>
+    <scroll-view class="foodList" scroll-y="true">
+      <view class="title">{{pets[selected].typeName}}</view>
+      <block wx:for="{{pets[selected].petContent}}" wx:key="">
+        <view class="food" bindtap="modalShow" data-name="{{item.name}}" data-src="{{item.src_big}}" data-sales="{{item.sales}}" data-rating="{{item.rating}}"data-material="{{item.material}}" data-price="{{item.price}}" data-desc="{{item.desc}}" data-numb="{{item.numb}}" data-index="{{index}}">
+          <image class="img" src="{{item.src}}" mode="aspectFill"></image>
+          <view class="food-info">
+            <text class="item name" decode="true">{{item.name}}</text>
+            <text class="item en_name" decode="true">{{item.enName}}</text>
+            <text class="item sales">月售 {{item.sales}} 赞 {{item.rating}}</text>
+            <text class="item price">￥ {{item.price}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="modal-title">{{foodName}}</view>
+      <view class="modal-img">
+        <image mode="aspectFit" src="{{src_big}}" style="min-width:400rpx;max-width:auto;min-height:auto;max-height:600rpx"></image>
+      </view>
+      <view class="modal-info">
+        <view class="sales">月售 {{sales}} 赞 {{rating}}</view>
+        <view class="food_info">{{material}}</view>
+        <view class="food_info">{{desc}}</view>
+      </view>
+      <view class="modal-pay">
+        <view class="modal-price">￥ {{price}}</view>
+      </view>
+    </view>
+    <image class="modal-cancle" bindtap="hideModal" wx:if="{{showModal}}" src="../../images/cancel.png"></image>
+</view>

@@ -1,0 +1,46 @@
+<!--pages/i_day/index.wxml-->
+<view class="container" style="overflow-x:hidden;background-color: #eee6e2;">
+  <view class="page-body">
+    <view class="page-section page-section-spacing swiper" style="position:absolute;left:0;top:0;">
+      <ss-icon name="back" color="{{iconColor}}" size="15px" block="{{true}}" class="navbar-action_item" bind:click="_navBack"></ss-icon>
+      <swiper class="s1" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current_1}}" circular="{{circular}}" style='height:{{windowWidth/5*3}}px;width:{{windowWidth}}px;position:absolute;left:0;top:0;z-index:1;'>
+        <block wx:key="" wx:for="{{imgUrls}}">
+          <swiper-item>
+            <image src='{{item}}' mode="widthFix" style="width:{{windowWidth}}px;opacity:0.9" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='title t1' style="top:{{windowWidth/5*3}}px;left:0">
+        <text class='cn' decode="true">&nbsp; 点我了解</text>
+      </view>
+      <view class="banner-swiper" style="height:{{0.2*windowHeight+27}}px;margin-top: 0;margin-bottom: 0;position:absolute;left:0;top:{{windowWidth/5*3+29}}px;z-index:1;">
+        <swiper circular="{{circular_1}}" indicator-dots="{{false}}" autoplay="{{false}}" current='{{swiperCurrent}}' indicator-color="{{beforeColor}}" indicator-active-color="{{afterColor}}" previous-margin="{{windowWidth/5}}px" next-margin="{{windowWidth/5}}px"
+          bindchange="swiperChange" style="height:{{0.2*windowHeight+30}}px;">
+          <block wx:key="" wx:for="{{photoTweets}}">
+            <swiper-item style="padding:12rpx;">
+              <image src="{{item}}" mode="widthFix" class="slide-image{{index == swiperCurrent ? ' active' : ''}}" bindchange="chuangEvent" bindtap="onAnimalType" id="{{index}}" style="border-radius:15rpx;"></image>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class='title t1' style="top:{{windowWidth/5*3+0.2*windowHeight+66}}px;left:0">
+        <text class='cn' decode="true">&nbsp; 图说格度</text>
+      </view>
+      <view class="content" style="width:100%;margin-top: 16rpx;margin-bottom: 0;padding: 0;position:absolute;left:0;top:{{windowWidth/5*3+0.2*windowHeight+95}}px;z-index:1;">
+        <view class="img_group">
+          <image src="../../images/day4.jpg"></image>
+          <image src="../../images/day5.jpg"></image>
+          <image src="../../images/day6.jpg"></image>
+        </view>
+        <view class="img_row">
+          <image src="../../images/day2_1.jpg"></image>
+          <image src="../../images/day2_21.jpg"></image>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="page-section" >  
+    </view> -->
+    <!-- <view class="page-section content page-section-spacing" style="width:{{windowWidth}}px;position:absolute;left:0;top:{{windowWidth/5*3+130}}px;">
+    </view> -->
+  </view>
+</view>

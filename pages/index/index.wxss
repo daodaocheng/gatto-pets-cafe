@@ -1,0 +1,197 @@
+/**index.wxss**/
+.clear{ clear:both} 
+.container{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.s1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:transparent;
+}
+.swiper-item{
+  text-align: center;
+  position: fixed;
+}
+.swiper-item>image{
+  display: block;
+  border: none;
+}
+.swiper_content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s2{
+  background-color:transparent;
+  padding: 6rpx;
+}
+.s2 .swiper-item>image{
+  display: block;
+  position: relative;
+  z-index: 0;
+  border-radius: 15rpx;
+}
+.containerText{
+  position: absolute;
+  z-index: 2; 
+  margin-left: 15rpx;
+  font-size: 30rpx;
+  font-weight:bold;
+  color: #fff;
+}
+/* .containerText.title{
+  font-size: 25rpx;
+  font-weight:500;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 10rpx;
+} */
+.img{
+  border-top: 1px solid #EDEDED;
+  border-bottom: 1px solid #EDEDED;
+}
+.img image{
+  display: block;
+  border-bottom: 1px solid #EDEDED;
+}d5e7f5d5e7f5d5e7f5d5e7f5
+.title{
+  padding: 0;
+  margin-top: 0;
+}
+.t1::before{
+  content: "";
+  position: absolute;
+  left: 20rpx;
+  top: 14rpx;
+  height: 30rpx;
+  width: 7rpx;
+  border-radius: 3rpx;
+  background: #9c5b4b;
+}
+.t2::before{
+  content: "";
+  position: absolute;
+  left: 20rpx;
+  margin-top:6rpx;
+  height: 30rpx;
+  width: 7rpx;
+  border-radius: 3rpx;
+  background: #9c5b4b;
+}
+.title text{
+  display: block;
+  width: 100%;
+  margin-left: 40rpx;
+  text-align: left;
+  color: #333;
+}
+.t2 .cn{
+  margin-bottom: 5rpx;
+}
+.title .cn{
+  font-size: 16px;
+  font-weight: bold;
+}
+.title .en{
+  font-size: 12px;
+}
+
+.icon{
+  background-color: #eee6e2;
+  position: fixed;
+  display: flex;
+  overflow: hidden;
+}
+
+.nav{
+  margin-top: 15rpx;
+  margin-bottom: 25rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15rpx;
+  padding-left: 20rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  background-color: #e6cbc5;
+}
+
+.nav:first-child{
+  margin-left: 20rpx;
+  margin-right: 6rpx;
+}
+
+.nav:last-child{
+  margin-left: 6rpx;
+  margin-right: 20rpx;
+}
+.textArea{
+  display: block;
+  float: left;
+  width: 82%
+}
+.icon text{
+  display: block;
+  width: 100%;
+  color: #000;
+  text-align: left;
+}
+.iconTitle{
+  font-size: 1rem;
+  font-weight: bold;
+}
+.openTime{
+  font-size: 18rpx;
+  color: #707070ee;
+}
+.icon image{
+  display: block;
+  width: 75rpx;
+  height: 75rpx;
+  margin-right: 10rpx;
+}
+.icon navigator{
+  flex: 1 0 25%;
+}
+
+.content{
+  background-color: #eee6e2;
+  height: auto;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.article{
+  height: 80px;
+  width: 100%;
+  padding: 10px;
+}
+
+.article_text{
+  float: left;
+  margin-left: 10px;
+  width: 70%;
+  font-size: 18px;
+}
+
+.article_img{
+  width: 24%;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.article_img>image{
+  display: block;
+}
+
+.tc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6rpx;
+  padding-bottom: 8rpx;
+}

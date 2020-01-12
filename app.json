@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/list/index",
+    "pages/i_cart/index",
+    "pages/i_user/index",
+    "pages/details/index",
+    "pages/bindPhone/index",
+    "pages/coupon/index",
+    "pages/order/index",
+    "pages/i_order/index",
+    "pages/addressList/index",
+    "pages/addressAdd/index",
+    "pages/orderDetails/index",
+    "pages/i_mall/index",
+    "pages/i_day/index",
+    "pages/i_night/index",
+    "pages/showTweets/showTweets",
+    "pages/i_pets/index",
+    "pages/animalList/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "color": "#333",
+    "selectedColor": "#ff5f19",
+    "list": [
+      {
+        "selectedIconPath": "images/home_page_n.png",
+        "iconPath": "images/home_page_y.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/order_n.png",
+        "iconPath": "images/order.png",
+        "pagePath": "pages/i_order/index",
+        "text": "点单"
+      },
+      {
+        "selectedIconPath": "images/mall_n.png",
+        "iconPath": "images/mall.png",
+        "pagePath": "pages/i_mall/index",
+        "text": "商城"
+      },
+      {
+        "selectedIconPath": "images/my_y.png",
+        "iconPath": "images/my_n.png",
+        "pagePath": "pages/i_user/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "cloud": true
+}

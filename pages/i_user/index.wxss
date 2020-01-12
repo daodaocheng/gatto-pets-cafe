@@ -1,0 +1,85 @@
+.top{
+ height: 60vh;
+ border-bottom: 8px solid #dedede;
+ background: #fff;
+ position: relative;
+}
+.top_user_info{
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top_user_info .img{
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 25%;
+}
+
+.top_user_info .text{
+  padding-top: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #333333;
+}
+.item{
+  display: flex;
+  line-height: 50px;
+  border-bottom: 1px solid #dedede;
+  background: #fff;
+  padding: 0 16px;
+}
+
+.item .left{
+  flex: 1 0 50%;
+  font-size: 16px;
+  color: #333333;
+}
+
+.item .right{
+  flex: 1 0 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.item image{
+  width: 8px;
+  height: 15px;
+}
+
+.item text{
+  font-size: 12px;
+  color: #999999;
+  padding-right: 10px;
+}
+
+.icon{
+  border-top:1px solid #EDEDED; 
+  display: flex;
+  width: 100%;
+  position: absolute;
+  padding: 12px 0;
+  text-align: center;
+  bottom: 0;
+}
+.icon image{
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+.icon text{
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+  color: #333;
+  padding-top: 10px;
+}
+.icon navigator{
+  flex: 1 0 25%;
+}

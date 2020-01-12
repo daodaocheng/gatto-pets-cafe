@@ -1,0 +1,40 @@
+<!--pages/i_night/index.wxml-->
+<view class="container" style="overflow:hidden;background-color: #eee;">
+  <ss-icon name="back" color="{{iconColor}}" size="15px" block="{{true}}" class="navbar-action_item" bind:click="_navBack"></ss-icon>
+  <swiper 
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" 
+    interval="{{interval}}" 
+    duration="{{duration}}"
+    current="{{current_1}}"
+    circular="{{circular}}"
+    style='height:{{windowWidth/5*3}}px;width:{{windowWidth}}px;'
+    >
+      <block wx:key="" wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src='{{item}}' mode="widthFix" style="width:{{windowWidth}}px;opacity:0.9"/>
+        </swiper-item>
+      </block>
+  </swiper>
+  <view class="content">
+    <view class="icon_group">
+      <view class="icon_item" bindtap="onSight">
+        <image src="../../images/jellyfish.png"></image>
+        <text>梦幻桌景</text>
+      </view>
+      <view class="icon_item" bindtap="onAlcohol">
+        <image src="../../images/wine.png"></image>
+        <text>把酒言欢</text>
+      </view>
+    </view>
+    <view class="img_group">
+      <image src="{{imgUrls2[0]}}"></image>
+      <image src="{{imgUrls2[1]}}"></image>
+    </view>
+    <view class="img_column">
+      <image src="{{imgUrls2[2]}}"></image>
+      <image src="{{imgUrls2[3]}}"></image>
+      <image src="{{imgUrls2[4]}}"></image>
+    </view>
+  </view>
+</view>

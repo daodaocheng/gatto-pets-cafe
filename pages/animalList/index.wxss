@@ -1,0 +1,93 @@
+/* pages/animalList/index.wxss */
+.content{
+ width: 100%;
+ position: fixed;
+ z-index: 1;
+ display: flex;
+ flex-direction:row;
+ overflow-y: scroll;
+ justify-content: space-between;
+ flex-wrap:wrap;
+ padding: 5rpx;
+}
+
+.item{
+ width: 47%;
+ margin: 0 0.3% 20rpx 0.3%;
+ display: flex;
+ padding-bottom: 0;
+ flex-direction: column;
+ float: left;
+}
+
+.item image{
+ width: 96%;
+ padding: 0 8rpx;
+ margin: 0 auto;
+}
+
+.item text{
+  font-size: large;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 650rpx;
+  overflow: hidden;
+  position: fixed;
+  top: auto;
+  padding-bottom: 25rpx;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  margin: 20% 50rpx;
+  border-radius: 25rpx;
+}
+
+.modal-title {
+  padding-top: 25rpx;
+  padding-bottom: 15rpx;
+  padding-left: 40rpx;
+  font-size: 35rpx;
+  color: #030303;
+  text-align: left;
+}
+
+.modal-img{
+  margin: 0 25rpx;
+}
+
+.modal-info{
+  margin: 0 25rpx 15rpx;
+  display: flex;
+ flex-direction: column;
+}
+
+.food_info{
+  font-size: 25rpx;
+  color: #707070;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.modal-cancle{
+  position: fixed;
+  z-index: 9999;
+  bottom: 5vh;
+  left: 43vw;
+  width: 80rpx;
+  height: 80rpx;
+}
