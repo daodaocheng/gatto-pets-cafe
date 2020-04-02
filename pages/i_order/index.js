@@ -12,43 +12,44 @@ Page({
     selected: 0,
     howMuch: 12,
     pullBar: false,
-    showModal:false,
-    foodName:null,
-    src_big:null,
-    sales:null,
-    rating:null,
-    material:null,
-    price:null,
-    desc:null,
-    numb:null,
-    index:null,
-    menu:[{
-      typeName: "咖啡",
-      menuContent: []
-    },
-    {
-      typeName: "水果茶",
-      menuContent: []
-    },{
-      typeName: "苏打",
-      menuContent: []
-    }, {
-      typeName: "特调",
-      menuContent: []
-    }, {
-      typeName: "甜点",
-      menuContent: []
-    }, {
-      typeName: "酒",
-      menuContent: []
-    }, {
-      typeName: "简餐",
-      menuContent: []
-    }]
+    showModal: false,
+    foodName: null,
+    src_big: null,
+    sales: null,
+    rating: null,
+    material: null,
+    price: null,
+    desc: null,
+    numb: null,
+    index: null,
+    menu: [{
+        typeName: "咖啡",
+        menuContent: []
+      },
+      {
+        typeName: "水果茶",
+        menuContent: []
+      }, {
+        typeName: "苏打",
+        menuContent: []
+      }, {
+        typeName: "特调",
+        menuContent: []
+      }, {
+        typeName: "甜点",
+        menuContent: []
+      }, {
+        typeName: "酒",
+        menuContent: []
+      }, {
+        typeName: "简餐",
+        menuContent: []
+      }
+    ]
   },
-  modalShow:function(e){
+  modalShow: function(e) {
     this.setData({
-      showModal:true,
+      showModal: true,
       foodName: e.currentTarget.dataset.name,
       src_big: e.currentTarget.dataset.src,
       sales: e.currentTarget.dataset.sales,
@@ -60,17 +61,17 @@ Page({
       index: e.currentTarget.dataset.index
     })
   },
-  hideModal:function(e){
+  hideModal: function(e) {
     this.setData({
-      showModal:false
+      showModal: false
     })
   },
-  pullBar: function () {
+  pullBar: function() {
     this.setData({
       pullBar: !this.data.pullBar
     })
   },
-  addToTrolley: function (e) {
+  addToTrolley: function(e) {
     var info = this.data.menu;
     info[this.data.selected].menuContent[e.currentTarget.dataset.index].numb++;
     this.setData({
@@ -78,7 +79,7 @@ Page({
       menu: info,
     })
   },
-  addToTrolley_modal: function (e) {
+  addToTrolley_modal: function(e) {
     var info = this.data.menu;
     console.log(this.data);
     info[this.data.selected].menuContent[this.data.index].numb++;
@@ -88,7 +89,7 @@ Page({
       numb: info[this.data.selected].menuContent[this.data.index].numb
     })
   },
-  removeFromTrolley: function (e) {
+  removeFromTrolley: function(e) {
     var info = this.data.menu;
     if (info[this.data.selected].menuContent[e.currentTarget.dataset.index].numb != 0) {
       info[this.data.selected].menuContent[e.currentTarget.dataset.index].numb--;
@@ -98,7 +99,7 @@ Page({
       })
     }
   },
-  removeFromTrolley_modal: function (e) {
+  removeFromTrolley_modal: function(e) {
     var info = this.data.menu;
     if (info[this.data.selected].menuContent[this.data.index].numb != 0) {
       info[this.data.selected].menuContent[this.data.index].numb--;
@@ -109,32 +110,32 @@ Page({
       })
     }
   },
-  turnPage: function (e) {
+  turnPage: function(e) {
     this.setData({
       currentPage: e.currentTarget.dataset.index
     })
   },
-  turnTitle: function (e) {
+  turnTitle: function(e) {
     if (e.detail.source == "touch") {
       this.setData({
         currentPage: e.detail.current
       })
     }
   },
-  turnMenu: function (e) {
+  turnMenu: function(e) {
     this.setData({
       selected: e.currentTarget.dataset.index
     })
     console.log(e.currentTarget.dataset.index);
   },
-  getMenuList: function () {
+  getMenuList: function() {
     var that = this;
-    switch(this.data.selected){
+    switch (this.data.selected) {
       case 0:
         dbo.collection('menu').where({
           typeName: '咖啡'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -152,7 +153,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '水果茶'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -170,7 +171,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '苏打'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -188,7 +189,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '特调'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -206,7 +207,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '甜点'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -224,7 +225,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '酒'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -242,7 +243,7 @@ Page({
         dbo.collection('menu').where({
           typeName: '简餐'
         }).get({
-          success: function (res) {
+          success: function(res) {
             var arr = [];
             var count = res.data.length;
             if (count != 0) {
@@ -256,62 +257,62 @@ Page({
           },
           fail: console.error
         })
-      break;
+        break;
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
+  onLoad: function(options) {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.getMenuList();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

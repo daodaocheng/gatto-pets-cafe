@@ -1,5 +1,5 @@
 // pages/user/index.js
-const app = getApp()
+const app = getApp();
 wx.cloud.init({
   env: "gatto-pets-cafe-mzve6"
 })
@@ -11,19 +11,27 @@ Page({
    */
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    userInfo: null
+    userInfo: null,
+    hasUserInfo: false,
+    modle: null,
+    hasPhoneNumber: false
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
-    
+  onLoad: function(options) {
+    if (app.globalData.userInfo != null){
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     var that = this;
     var _that = e;
+    var userData = null;
     console.log(e);
     app.globalData.userInfo = e.detail.userInfo;
     console.log(app.globalData.userInfo);
@@ -31,89 +39,76 @@ Page({
       name: 'login',
       complete: res => {
         console.log('callFunction test result: ', res)
-        const app = getApp()
         app.globalData.openid = res.result.openid
-        console.log('openid: ', app.globalData.openid);
-        that.signUp_to_database(app.globalData.openid, app.globalData.userInfo)
-        that.setData({
-          userInfo: _that.detail.userInfo,
-          hasUserInfo: true,
-        });
-      }
-    })
-  },
-  signUp_to_database: function (openid, userInfo) {
-    db.collection('user').get().then(res => {
-      var count = res.data.length;
-      var flag = true;
-      for (var i = 0; i < count; count++) {
-        if (res.data.openid == openid) {
-          flag = false;
-        }
-      }
-      if (flag) {
-        db.collection('user').add({
-          // data 字段表示需新增的 JSON 数据
-          data: {
-            openid: openid,
-            nickName: userInfo.nickName,
-            phoneNumber: '',
-            role: '普通会员'
+        app.userQuery(db).then(function (res_q) {
+          var flag = false;
+          for (var i = 0; i < res_q.data.length; i++) {
+            if (res_q.data[i]._openid == app.globalData.openid) {
+              flag = true;
+              app.globalData.role = res_q.data[i].role;
+              that.setData({
+                userInfo: _that.detail.userInfo,
+                hasUserInfo: true,
+              });
+            }
+          }
+          if(flag == false){
+            userData = {
+              openid: app.globalData.openid,
+              nickName: app.globalData.userInfo.nickName,
+            }
+            app.signUp_to_database(userData, db);
           }
         })
-          .then(res => {
-            console.log(res)
-          })
-          .catch(console.error)
       }
-    }).catch(console.error)
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function() {
+
   }
 })

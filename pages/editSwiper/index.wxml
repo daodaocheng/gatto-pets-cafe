@@ -1,0 +1,49 @@
+<!--pages/editSwiiper/index.wxml-->
+<view class="container">
+  <navbar page-name="编辑首页轮播图"></navbar>
+  <view class="submitEdit" bindtap="submitEdit">完成编辑</view>
+  <scroll-view class="swiper_imgs" bindscrolltolower="lower" scroll-y="true">
+    <block wx:for="{{swiperItems}}" wx:key="">
+      <view class="swiperItemList">
+        <view class="itemText">
+          <text class="itemTextLeft">轮播图{{index+1}}</text>
+          <view wx-if="{{index > 0}}" class="operateSwiper">
+            <view>上移</view>
+            <view>删除</view>
+          </view>
+        </view>
+        <view class="imgContainer" bindtap="updateImg">
+          <image src="{{swiperItems[index].src}}" mode="aspectFit"></image>
+        </view>
+        <view wx:if="{{swiperItems[index].url != ''}}">{{swiperItems[index].url}}</view>
+        <view wx:elif="{{swiperItems[index].url == ''}}" class="addInfoLink">+ 添加宣传链接(选填)</view>
+      </view>
+    </block>
+    <view wx:if="{{newItems.length>0}}">
+      <block wx:for="{{newItems}}" wx:key="item">
+        <view class="swiperItemList newItem">
+          <view class="itemText">
+            <text class="itemTextLeft">轮播图{{index+swiperItems.length+1}}</text>
+            <view class="operateSwiper">
+              <view class="operateU">上移</view>
+              <view class="operateD">删除</view>
+            </view>
+          </view>
+          <view class="imgContainer" bindtap="updateImg">
+            <block wx:if="{{newItems.[index].src!=''}}">
+              <image src="{{newItems.[index].src}}" mode="aspectFit"></image>
+            </block>
+            <block wx:else>
+              <view class="chooseImg"></view>
+            </block>
+          </view>
+          <view wx:if="{{newItems.[index].url!=''}}">{{item.url}}</view>
+          <view wx:else class="addInfoLink">+ 添加宣传链接(选填)</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <view class="addSwiper">
+    <button bindtap="addSwiper">添加轮播图</button>
+  </view>
+</view>

@@ -17,7 +17,8 @@
     "pages/i_night/index",
     "pages/showTweets/showTweets",
     "pages/i_pets/index",
-    "pages/animalList/index"
+    "pages/animalList/index",
+    "pages/editSwiper/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

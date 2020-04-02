@@ -1,21 +1,13 @@
 <!--index.wxml-->
 <view class="container" style="overflow-x:hidden;background-color: #eee6e2;">
-  <swiper 
-    class="s1"
-    indicator-dots="{{indicatorDots}}"
-    autoplay="{{autoplay}}" 
-    interval="{{interval}}" 
-    duration="{{duration}}"
-    circular="{{circular}}"
-    current="{{current_1}}"
-    style='height:{{windowWidth/5*3}}px;width:{{windowWidth}}px;position: absolute;top:0;left:0;'
-    >
-      <block wx:for="{{imgUrls}}">
-        <swiper-item>
-          <image src='{{item}}' mode="widthFix" style="width:{{windowWidth}}px;height:{{windowWidth/5*3}}px;"/>
-        </swiper-item>
-      </block>
+  <swiper class="s1" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" current="{{current_1}}" style='height:{{windowWidth/5*3}}px;width:{{windowWidth}}px;position: absolute;top:0;left:0;'>
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src='{{item}}' mode="widthFix" style="width:{{windowWidth}}px;height:{{windowWidth/5*3}}px;" />
+      </swiper-item>
+    </block>
   </swiper>
+  <view class="edit_btn" wx:if="{{model == 'edit'}}" style="top:{{windowWidth/11*3}}px;" bindtap="clickEditSwiper">编辑</view>
   <view class='icon' style="position: absolute;top:{{windowWidth/5*3}}px;left:0;width:100%;height:0.13*windowHeight;padding-top:20rpx;">
     <navigator class="nav" hover-class="none" url="/pages/i_day/index?id=5b8e37e34b640a63b33272dc">
       <view class="textArea">
@@ -34,38 +26,42 @@
       <div class="clear"></div>
     </navigator>
   </view>
-  <view class="content" style="width:{{windowWidth}}px;position:absolute;top:{{windowWidth/5*3+0.13*windowHeight}}px;left:0;">
+  <view class="content" style="width:{{windowWidth}}px;position:absolute;top:{{windowWidth/5*3+0.14*windowHeight}}px;left:0;">
     <view class='title t1'>
       <text class='cn' decode="true">&nbsp; 猫片</text>
+      <view class="edit_btn" wx:if="{{model == 'edit'}}" bindtap="clickEditVideo">编辑</view>
     </view>
     <view class="section tc">
       <video id="gdVideo" style="width:288px;height:162px;border-radius:15rpx" controls src="{{video}}"></video>
     </view>
     <view class='title t2'>
       <text class='cn' decode="true">&nbsp; 新鲜事</text>
+      <view class="edit_btn" wx:if="{{model == 'edit'}}" bindtap="clickEditSwiper2">编辑</view>
     </view>
     <view class="swiper_content" style='height:{{windowWidth*2/5}}px;width:{{windowWidth}}px;margin-top:30rpx;'>
-      <swiper 
-        class="s2"
-        indicator-dots="{{indicatorDots_1}}"
-        autoplay="{{autoplay_1}}" 
-        duration="{{duration}}"
-        current="{{current}}"
-        circular="{{circular1}}"
-        style='height:{{windowWidth*2/5+8}}px;width:{{windowWidth}}px;'
-        previous-margin='{{windowWidth/6}}px'
-        next-margin='{{windowWidth/6}}px'
-        >
-          <block wx:for="{{photoTweets}}">
-            <swiper-item style='width:{{windowWidth*2/3}}px;' data-id="{{index}}" bindtap="toPhotoTweets">
-              <view class='containerText' style="width:{{windowWidth*2/3-32}}px;margin-top:{{windowWidth*2/8}}px;">
+      <swiper class="s2" indicator-dots="{{indicatorDots_1}}" autoplay="{{autoplay_1}}" duration="{{duration}}" current="{{current}}" circular="{{circular1}}" style='height:{{windowWidth*2/5+8}}px;width:{{windowWidth}}px;' previous-margin='{{windowWidth/6}}px'
+        next-margin='{{windowWidth/6}}px'>
+        <block wx:for="{{photoTweets}}">
+          <swiper-item style='width:{{windowWidth*2/3}}px;' data-id="{{index}}" bindtap="toPhotoTweets">
+            <view class='containerText' style="width:{{windowWidth*2/3-32}}px;margin-top:{{windowWidth*2/8}}px;">
               {{item.title}}
-              </view>
-              <image src='{{item.photo}}' mode="aspectFill" 
-              style="width:{{windowWidth*2/3-20}}px;height:{{windowWidth*2/5-12}}px;border-radius:15rpx;"/>
-            </swiper-item>
-          </block>
+            </view>
+            <image src='{{item.photo}}' mode="aspectFill" style="width:{{windowWidth*2/3-20}}px;height:{{windowWidth*2/5-12}}px;border-radius:15rpx;" />
+          </swiper-item>
+        </block>
       </swiper>
     </view>
   </view>
+  <view wx:if="{{role == '管理员'}}" class="change-mode" hover-class="plus-hover" bindtap="onModelChange">
+    <image src="/images/change-mode.png"></image>
+  </view>
+  <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">您是Gatto小程序管理员，请选择页面展示模式：</view>
+    <view class='modal-footer'>
+      <view class='btn_show' bindtap='onShowModel'>普通模式</view>
+      <view class='btn_edit' bindtap='onEditModel'>编辑模式</view>
+    </view>
+  </view>
+  <image class="modal-cancle" bindtap="hideModal" wx:if="{{showModal}}" src="../../images/cancel.png"></image>
 </view>

@@ -11,7 +11,10 @@ App({
     windowHeight: null,
     windowWidth: null,
     userInfo: null,
-    openid: null
+    openid: null,
+    role: null,
+    userInfo: null,
+    modle: null
   },
   onLaunch: function() {
     wx.getSystemInfo({
@@ -32,85 +35,110 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // const app = getApp()
-        // app.globalData.openid = res.data.openid
-        // app.globalData.userInfo = res.data
-        // if (!res.data.mobile) {
-        //   wx.reLaunch({
-        //     url: "/pages/bindPhone/index"
-        //   });
-        // }
-        // this.http('v1/wx/getUser', { code:res.code}).then(res=>{
-        //   const app = getApp()
-        //   app.globalData.openid = res.data.openid
-        //   app.globalData.userInfo = res.data
-        //   if (!res.data.mobile) {
-        //     wx.reLaunch({
-        //       url: "/pages/bindPhone/index"
-        //     });
-        //   }
-        // })
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              console.log(res.userInfo)
-              wx.cloud.callFunction({
-                name: 'login',
-                complete: res => {
-                  console.log('callFunction test result: ', res)
-                  const app = getApp()
-                  app.globalData.openid = res.result.openid
-                  console.log('openid: ', app.globalData.openid);
-                  this.signUp_to_database(app.globalData.openid, app.globalData.userInfo);
-                }
-              })
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
+    wx.cloud.callFunction({
+      name: 'login',
+      complete: res => {
+        this.globalData.openid = res.result.openid
+        console.log('openid: ', this.globalData.openid);
+        db.collection('user').where({
+          openid: this.globalData.openid // 填入当前用户 openid
+        }).get().then(res => {
+          this.globalData.role = res.data.role;
+        })
+        //this.signUp_to_database(app.globalData.openid, app.globalData.userInfo);
       }
     })
   },
-  signUp_to_database: function(openid, userInfo) {
-    db.collection('user').get().then(res => {
-      var count = res.data.length;
-      var flag = true;
-      for (var i = 0; i < count; count++) {
-        if (res.data.openid == openid) {
-          flag = false;
+  signUp_to_database: function (userData, db) {
+    var that = this;
+    this.userQuery(db).then(function (res_q) {
+      var flag = false;
+      for (var i = 0; i < res_q.data.length; i++) {
+        if (res_q.data[i]._openid == userData._openid) {
+          flag = true;
+          that.globalData.userId = res_q.data[i]._id;
         }
       }
-      if (flag) {
+      if (flag == false) {
+        console.log("新增");
         db.collection('user').add({
-            // data 字段表示需新增的 JSON 数据
-            data: {
-              openid: openid,
-              nickName: userInfo.nickName,
-              phoneNumber: '',
-              role: '普通会员'
-            }
-          })
+          // data 字段表示需新增的 JSON 数据
+          data: {
+            openid: userData._openid,
+            nickName: userData.nickName,
+            phoneNumber: '',
+            role: '普通会员'
+          }
+        })
           .then(res => {
             console.log(res)
           })
           .catch(console.error)
       }
-    }).catch(console.error)
-  }
+      else {
+        console.log("更新");
+        db.collection('user').doc(that.globalData.userId).update({
+          // data 字段表示需新增的 JSON 数据
+          data: {
+            openid: userData._openid,
+            nickName: userData.nickName,
+            phoneNumber: '',
+            role: '普通会员'
+          }
+        })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(console.error)
+      }
+    })
+  },
+  userQuery: async function (db) {
+    const MAX_LIMIT = 20;
+    // 先取出集合记录总数
+    const countResult = await db.collection('user').count();
+    const total = countResult.total;
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 1000);
+    // 承载所有读操作的 promise 的数组
+    const tasks = []
+    for (let i = 0; i < batchTimes; i++) {
+      const promise = db.collection('user').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+      tasks.push(promise)
+    }
+    // 等待所有
+    return (await Promise.all(tasks)).reduce((acc, cur) => {
+      return {
+        data: acc.data.concat(cur.data),
+        errMsg: acc.errMsg,
+      }
+    })
+  },
+  // signUp_to_database: function(openid, userInfo) {
+  //   db.collection('user').get().then(res => {
+  //     var flag = true;
+  //     var i;
+  //     var count = res.data.length;
+  //     for (i = 0; i < count; i++) {
+  //       if (res.data[i].openid == openid) {
+  //         flag = false;
+  //       }
+  //     }
+  //     if (flag) {
+  //       db.collection('user').add({
+  //           // data 字段表示需新增的 JSON 数据
+  //           data: {
+  //             openid: openid,
+  //             nickName: userInfo.nickName,
+  //             phoneNumber: '',
+  //             role: '普通会员'
+  //           }
+  //         })
+  //         .then(res => {
+  //           console.log(res)
+  //         })
+  //         .catch(console.error)
+  //     }
+  //   }).catch(console.error)
+  // }
 })

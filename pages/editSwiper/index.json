@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "编辑首页轮播图",
+  "usingComponents": {
+    "navbar": "/components/navbar/index"
+  }
+}
